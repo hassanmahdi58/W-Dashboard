@@ -1,6 +1,6 @@
 
 
-var city="";
+
 // variable declaration
 var searchCity = $("#search-city");
 var searchButton = $("#search-button");
@@ -11,7 +11,7 @@ var currentHumidty= $("#humidity");
 var currentWSpeed=$("#wind-speed");
 var currentUvindex= $("#uv-index");
 var sCity=[];
-// searches the city to see if it exists in the entries from the storage
+
 function find(c){
     for (var i=0; i<sCity.length; i++){
         if(c.toUpperCase()===sCity[i]){
@@ -22,7 +22,7 @@ function find(c){
 }
 //Set up the API key
 var APIKey="a0aca8a89948154a4182dcecc780b513";
-// Display the curent and future weather to the user after grabing the city form the input text box.
+
 function displayWeather(event){
     event.preventDefault();
     if(searchCity.val().trim()!==""){
@@ -32,7 +32,7 @@ function displayWeather(event){
 }
 // Here we create the AJAX call
 function currentWeather(city){
-    // Here we build the URL so we can get a data from server side.
+    
     var queryURL= "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + APIKey;
     $.ajax({
         url:queryURL,
@@ -54,7 +54,7 @@ function currentWeather(city){
         $(currentTemperature).html((tempF).toFixed(2)+"&#8457");
        
         $(currentHumidty).html(response.main.humidity+"%");
-        //Display Wind speed and convert to MPH
+      
         var ws=response.wind.speed;
         var windsmph=(ws*2.237).toFixed(1);
         $(currentWSpeed).html(windsmph+"MPH");
@@ -94,7 +94,7 @@ function UVIndex(ln,lt){
             });
 }
     
-// Here we display the 5 days forecast for the current city.
+
 function forecast(cityid){
     var dayover= false;
     var queryforcastURL="https://api.openweathermap.org/data/2.5/forecast?id="+cityid+"&appid="+APIKey;
@@ -111,14 +111,14 @@ function forecast(cityid){
             var tempK= response.list[((i+1)*8)-1].main.temp;
             var tempF=(((tempK-273.5)*1.80)+32).toFixed(2);
             var humidity= response.list[((i+1)*8)-1].main.humidity;
-            var humidity= response.list[((i+1)*6)-1].main.humidity;
+            
            
         
             $("#fDate"+i).html(date);
             $("#fImg"+i).html("<img src="+iconurl+">");
             $("#fTemp"+i).html(tempF+"&#8457");
             $("#fHumidity"+i).html(humidity+"%");
-            $("#fHumidity"+i).html(humidity+"%");
+           
             
         }
         
